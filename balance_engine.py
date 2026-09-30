@@ -10,7 +10,7 @@ def calculate_balance(supporting_claims_count, opposing_claims_count, neutral_cl
     supporting_percentage = (supporting_claims_count / total_claims)*100
     opposing_percentage = (opposing_claims_count / total_claims)*100
     neutral_percentage = (neutral_claims_count / total_claims)*100
-    source_bias = (distinct_sources_count / total_claims)*100
+    source_diversity = (distinct_sources_count / total_claims) * 100
 
     dominant_percentage = max(supporting_percentage, opposing_percentage, neutral_percentage)
 
@@ -21,12 +21,13 @@ def calculate_balance(supporting_claims_count, opposing_claims_count, neutral_cl
         score += 2
         reasons.append("Dominant claim is between 60% and 80% of total claims")
 
-    if source_bias > 80:
-        score += 3
-        reasons.append("Source bias exceeds 80% of total claims")
-    elif source_bias >= 60:
-        score += 2
-        reasons.append("Source bias is between 60% and 80% of total claims")
+    if source_diversity <= 30:
+       score += 3
+       reasons.append("Very low source diversity")
+
+    elif source_diversity <= 50:
+       score += 2
+       reasons.append("Limited source diversity")
 
     return score, reasons
 
