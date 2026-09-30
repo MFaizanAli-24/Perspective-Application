@@ -12,7 +12,7 @@ def calculate_balance(supporting_claims_count, opposing_claims_count, neutral_cl
     neutral_percentage = (neutral_claims_count / total_claims)*100
     source_diversity = (distinct_sources_count / total_claims) * 100
 
-    dominant_percentage = max(supporting_percentage, opposing_percentage, neutral_percentage)
+    dominant_percentage = max(supporting_percentage, opposing_percentage)
 
     if dominant_percentage > 80:
         score +=3
